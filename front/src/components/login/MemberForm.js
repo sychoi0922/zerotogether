@@ -297,235 +297,276 @@ const MemberForm = ({ initialData, onSubmit, onCancel, isEditing }) => {
       {serverError && <div className="alert alert-danger">{serverError}</div>}
       {isLoading && <div className="alert alert-info">처리 중입니다...</div>}
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="member-form-group">
-          <Form.Label className="member-form-label">아&nbsp;&nbsp;이&nbsp;&nbsp;디</Form.Label>
-          <div className="col-sm-10">
-            <Form.Control
-              className="member-form-control"
-              type="text"
-              name="memId"
-              value={member.memId || ''}
-              onChange={handleInputChange}
-              readOnly={isEditing}
-              required
-            />
-            {!isEditing && (
-              <Button onClick={checkDuplicateId} className="btn btn-primary btn-sm mt-2" disabled={isLoading}>
-              {isLoading ? '확인 중...' : 'ID중복 확인'}
-          </Button>
-            )}
-            {isChecked && (
-              <div>
-                {isDuplicate ? (
-                  <span style={{ color:'red' }}>이미 사용 중인 아이디입니다.</span>
-                ) : (
-                  <span style={{ color: 'green' }}>사용 가능한 아이디입니다.</span>
-                )}
-              </div>
-            )}
-            <ValidationMessage message={errors.memId} />
-          </div>
-        </Form.Group>
-
-        <Form.Group className="member-form-group">
-          <Form.Label className="member-form-label">비밀번호</Form.Label>
-          <div className="col-sm-10">
-            <Form.Control
-              className="member-form-control"
-              type="password"
-              name="pwd"
-              placeholder={isEditing ? "비밀번호 (변경시에만 입력)" : "비밀번호"}
-              value={member.pwd || ''}
-              onChange={handleInputChange}
-              required={!isEditing}
-            />
-            <ValidationMessage message={errors.pwd} />
-          </div>
-        </Form.Group>
-
-        {!isEditing && (
-          <Form.Group className="member-form-group">
-            <Form.Label className="member-form-label">비밀번호 재확인</Form.Label>
-            <div className="col-sm-10">
-            <Form.Control
-  className="member-form-control"
-  type="password"
-  name="pwdConfirm"
-  placeholder="비밀번호 재확인"
-  value={member.pwdConfirm || ''}
-  onChange={handleInputChange}
-  required
-/>
-<ValidationMessage message={errors.pwdConfirm} />
-</div>
-</Form.Group>
-)}
-
-<Form.Group className="member-form-group">
-<Form.Label className="member-form-label">이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</Form.Label>
-<div className="col-sm-10">
-<Form.Control
-  className="member-form-control"
-  type="text"
-  name="memName"
-  value={member.memName || ''}
-  onChange={handleInputChange}
-  required
-/>
-<ValidationMessage message={errors.memName} />
-</div>
+      <Form.Group className="member-form-group d-flex align-items-center">
+  <Form.Label className="member-form-label text-end pe-3" style={{ width: "250px" }}>아&nbsp;&nbsp;이&nbsp;&nbsp;디</Form.Label>
+  <div className="d-flex flex-column flex-grow-1">
+    <div className="d-flex align-items-center">
+      <Form.Control
+        className="member-form-control flex-grow-1"
+        type="text"
+        name="memId"
+        value={member.memId || ''}
+        onChange={handleInputChange}
+        readOnly={isEditing}
+        required
+        style={{ maxWidth: "500px" }}
+      />
+      {!isEditing && (
+        <Button 
+          onClick={checkDuplicateId} 
+          className="btn btn-success btn-sm ms-2"
+          style={{ whiteSpace: 'nowrap' }}
+          disabled={isLoading}
+        >
+          {isLoading ? '확인 중...' : 'ID중복 확인'}
+        </Button>
+      )}
+    </div>
+    {isChecked && (
+      <div className="mt-1">
+        {isDuplicate ? (
+          <span style={{ color:'red' }}>이미 사용 중인 아이디입니다.</span>
+        ) : (
+          <span style={{ color: 'green' }}>사용 가능한 아이디입니다.</span>
+        )}
+      </div>
+    )}
+    <ValidationMessage message={errors.memId} />
+  </div>
 </Form.Group>
 
-<Form.Group className="member-form-group">
-<Form.Label className="member-form-label">이&nbsp;&nbsp;메&nbsp;&nbsp;일</Form.Label>
-<div className="col-sm-10">
-<Form.Control
-  className="member-form-control"
-  type="email"
-  name="email"
-  value={member.email || ''}
-  onChange={handleInputChange}
-  required
-/>
+<Form.Group className="member-form-group d-flex align-items-center">
+  <Form.Label className="member-form-label text-end pe-3" style={{ width: "250px" }}>비밀번호</Form.Label>
+  <div className="d-flex flex-column flex-grow-1">
+  <div className="d-flex align-items-center">
+  <Form.Control
+    className="member-form-control flex-grow-1"
+    type="password"
+    name="pwd"
+    placeholder={isEditing ? "비밀번호 (변경시에만 입력)" : "비밀번호"}
+    value={member.pwd || ''}
+    onChange={handleInputChange}
+    required={!isEditing}
+    style={{ maxWidth: "500px" }} // 텍스트 박스 길이 통일
+  />
+        </div>
+  <ValidationMessage message={errors.pwd} />
+  </div>
+</Form.Group>
+
 {!isEditing && (
-  <Button onClick={checkDuplicateEmail} className="btn btn-primary btn-sm mt-2">
-    Email중복 확인
-  </Button>
+  <Form.Group className="member-form-group d-flex align-items-center">
+    <Form.Label className="member-form-label text-end pe-3" style={{ width: "250px" }}>비밀번호 재확인</Form.Label>
+    <div className="d-flex flex-column flex-grow-1">
+    <div className="d-flex align-items-center">
+    <Form.Control
+      className="member-form-control flex-grow-1"
+      type="password"
+      name="pwdConfirm"
+      placeholder="비밀번호 재확인"
+      value={member.pwdConfirm || ''}
+      onChange={handleInputChange}
+      required
+      style={{ maxWidth: "500px" }} // 텍스트 박스 길이 통일
+    />
+            </div>
+  <ValidationMessage message={errors.pwdConfirm} />
+  </div>
+  </Form.Group>
 )}
-{isEmailChecked && (
-  <div>
-    {isEmailDuplicate ? (
-      <span style={{ color: 'red' }}>이미 사용 중인 이메일입니다.</span>
-    ) : (
-      <span style={{ color: 'green' }}>사용 가능한 이메일입니다.</span>
+
+<Form.Group className="member-form-group d-flex align-items-center">
+  <Form.Label className="member-form-label text-end pe-3" style={{ width: "250px" }}>이름</Form.Label>
+  <div className="d-flex flex-column flex-grow-1">
+  <div className="d-flex align-items-center">
+  <Form.Control
+    className="member-form-control flex-grow-1"
+    type="text"
+    name="memName"
+    value={member.memName || ''}
+    onChange={handleInputChange}
+    required
+    style={{ maxWidth: "500px" }} // 텍스트 박스 길이 통일
+  />
+  </div>
+  <ValidationMessage message={errors.memName} />
+  </div>
+</Form.Group>
+
+<Form.Group className="member-form-group d-flex align-items-center">
+  <Form.Label className="member-form-label text-end pe-3" style={{ width: "250px" }}>이메일</Form.Label>
+  <div className="d-flex flex-column flex-grow-1">
+  <div className="d-flex align-items-center">
+    <Form.Control
+      className="member-form-control flex-grow-1"
+      type="email"
+      name="email"
+      value={member.email || ''}
+      onChange={handleInputChange}
+      required
+      style={{ maxWidth: "500px" }} // 텍스트 박스 길이 통일
+    />
+    {!isEditing && (
+      <Button 
+        onClick={checkDuplicateEmail} 
+        className="btn btn-success btn-sm ms-2"
+        style={{ whiteSpace: 'nowrap' }}
+      >
+        Email중복 확인
+      </Button>
     )}
   </div>
-)}
-<ValidationMessage message={errors.email} />
-</div>
+  <ValidationMessage message={errors.email} />
+  </div>
 </Form.Group>
 
-<Form.Group className="member-form-group">
-<Form.Label className="member-form-label">핸드폰 번호</Form.Label>
-<div className="col-sm-10">
-<Form.Control
-  className="member-form-control"
-  type="tel"
-  name="tel"
-  value={isEditing ? (isPhoneVerificationRequired ? phoneNumber : member.tel) : phoneNumber}
-  placeholder={isEditing ? '(변경시에만 재인증)' : ''}
-  onChange={(e) => {
-    if (isEditing) {
-      if (isPhoneVerificationRequired) {
-        setPhoneNumber(e.target.value);
-      } else {
-        handleInputChange(e);
-      }
-    } else {
-      setPhoneNumber(e.target.value);
-      handleInputChange(e);
-    }
-  }}
-  readOnly={isEditing && !isPhoneVerificationRequired}
-/>
-{isEditing && !isPhoneVerificationRequired && (
-  <Button onClick={handlePhoneReauthentication} className="btn btn-primary btn-sm mt-2">
-    핸드폰 재인증
-  </Button>
-)}
-{(isPhoneVerificationRequired || !isEditing) && (
-  <Button onClick={handleSendVerification} className="btn btn-primary btn-sm mt-2">
-    인증번호 발송
-  </Button>
-)}
-<ValidationMessage message={errors.tel} />
-</div>
-</Form.Group>
-
-{(isPhoneVerificationRequired || !isEditing) && (
-<Form.Group className="member-form-group">
-  <Form.Label className="member-form-label">인증번호</Form.Label>
-  <div className="col-sm-10">
+{/* 핸드폰 번호 */}
+<Form.Group className="member-form-group d-flex align-items-center">
+  <Form.Label className="member-form-label text-end pe-3" style={{ width: "250px" }}>핸드폰 번호</Form.Label>
+  <div className="d-flex flex-grow-1">
     <Form.Control
-      className="member-form-control"
-      type="text"
-      value={verificationCode}
-      onChange={(e) => setVerificationCode(e.target.value)}
+      className="member-form-control flex-grow-1"
+      type="tel"
+      name="tel"
+      value={isEditing ? (isPhoneVerificationRequired ? phoneNumber : member.tel) : phoneNumber}
+      placeholder={isEditing ? '(변경시에만 재인증)' : ''}
+      onChange={(e) => {
+        if (isEditing) {
+          if (isPhoneVerificationRequired) {
+            setPhoneNumber(e.target.value);
+          } else {
+            handleInputChange(e);
+          }
+        } else {
+          setPhoneNumber(e.target.value);
+          handleInputChange(e);
+        }
+      }}
+      readOnly={isEditing && !isPhoneVerificationRequired}
+      style={{ maxWidth: "500px" }}
     />
-    <Button
-      onClick={handleVerifyCode}
-      className="btn btn-primary btn-sm mt-2"
-      disabled={isVerified}
+    {(isPhoneVerificationRequired || !isEditing) && (
+      <Button 
+        onClick={handleSendVerification} 
+        className="btn btn-primary btn-sm ms-2"
+        style={{ whiteSpace: "nowrap" }}
+      >
+        인증번호 발송
+      </Button>
+    )}
+    {isEditing && !isPhoneVerificationRequired && (
+      <Button 
+        onClick={handlePhoneReauthentication} 
+        className="btn btn-primary btn-sm ms-2"
+        style={{ whiteSpace: "nowrap" }}
+      >
+        핸드폰 재인증
+      </Button>
+    )}
+  </div>
+</Form.Group>
+
+{/* 인증번호 */}
+{(isPhoneVerificationRequired || !isEditing) && (
+  <Form.Group className="member-form-group d-flex align-items-center">
+    <Form.Label className="member-form-label text-end pe-3" style={{ width: "250px" }}>인증번호</Form.Label>
+    <div className="d-flex flex-grow-1">
+      <Form.Control
+        className="member-form-control flex-grow-1"
+        type="text"
+        value={verificationCode}
+        onChange={(e) => setVerificationCode(e.target.value)}
+        style={{ maxWidth: "500px" }}
+      />
+      <Button
+        onClick={handleVerifyCode}
+        className="btn btn-primary btn-sm ms-2"
+        disabled={isVerified}
+        style={{ whiteSpace: "nowrap" }}
+      >
+        인증하기
+      </Button>
+    </div>
+  </Form.Group>
+)}
+
+{/* 우편번호 */}
+<Form.Group className="member-form-group d-flex align-items-center">
+  <Form.Label className="member-form-label text-end pe-3" style={{ width: "250px" }}>우편번호</Form.Label>
+  <div className="d-flex flex-grow-1">
+    <Form.Control
+      className="member-form-control flex-grow-1"
+      type="text"
+      id="post"
+      name="post"
+      value={member.post || ''}
+      onChange={handleInputChange}
+      readOnly
+      required
+      style={{ maxWidth: "500px" }}
+    />
+    <Button 
+      onClick={handleDaumPost} 
+      className="btn btn-primary btn-sm ms-2"
+      style={{ whiteSpace: "nowrap" }}
     >
-      인증하기
+      우편번호 찾기
     </Button>
   </div>
 </Form.Group>
-)}
 
-<Form.Group className="member-form-group">
-<Form.Label className="member-form-label">우편번호</Form.Label>
-<div className="col-sm-10">
-<Form.Control
-  className="member-form-control"
-  type="text"
-  id="post"
-  name="post"
-  value={member.post || ''}
-  onChange={handleInputChange}
-  readOnly
-  required
-/>
-<Button onClick={handleDaumPost} className="btn btn-primary btn-sm mt-2">
-  우편번호 찾기
-</Button>
-</div>
+{/* 주소 */}
+<Form.Group className="member-form-group d-flex align-items-center">
+  <Form.Label className="member-form-label text-end pe-3" style={{ width: "250px" }}>주소</Form.Label>
+  <Form.Control
+    className="member-form-control flex-grow-1"
+    type="text"
+    id="addr1"
+    name="addr1"
+    value={member.addr1 || ''}
+    onChange={handleInputChange}
+    required
+    style={{ maxWidth: "500px" }}
+  />
 </Form.Group>
 
-<Form.Group className="member-form-group">
-<Form.Label className="member-form-label">주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</Form.Label>
-<div className="col-sm-10">
-<Form.Control
-  className="member-form-control"
-  type="text"
-  id="addr1"
-  name="addr1"
-  value={member.addr1 || ''}
-  onChange={handleInputChange}
-  required
-/>
-</div>
+{/* 상세주소 */}
+<Form.Group className="member-form-group d-flex align-items-center">
+  <Form.Label className="member-form-label text-end pe-3" style={{ width: "250px" }}>상세주소</Form.Label>
+  <Form.Control
+    className="member-form-control flex-grow-1"
+    type="text"
+    id="addr2"
+    name="addr2"
+    value={member.addr2 || ''}
+    onChange={handleInputChange}
+    required
+    style={{ maxWidth: "500px" }}
+  />
 </Form.Group>
 
-<Form.Group className="member-form-group">
-<Form.Label className="member-form-label">상세주소</Form.Label>
-<div className="col-sm-10">
-<Form.Control
-  className="member-form-control"
-  type="text"
-  id="addr2"
-  name="addr2"
-  value={member.addr2 || ''}
-  onChange={handleInputChange}
-  required
-/>
-</div>
-</Form.Group>
 
 {!isEditing && (
 <>
-  <Form.Group className="member-form-group">
-    <Form.Label className="member-form-label">이용약관</Form.Label>
-    <div className="col-sm-10">
+  {/* 이용약관 */}
+  <Form.Group className="member-form-group d-flex align-items-start">
+    <Form.Label className="member-form-label text-end pe-3" style={{ width: "250px", paddingTop: "12px" }}>
+      이용약관
+    </Form.Label>
+    <div className="d-flex flex-column flex-grow-1">
       <Form.Control
         as="textarea"
         value={termsContent}
         readOnly
         rows="6"
-        style={{ backgroundColor: '#f8f9fa', border: '1px solid #ced4da' }}
+        style={{ 
+          backgroundColor: '#f8f9fa', 
+          border: '1px solid #ced4da', 
+          maxWidth: "500px"
+        }}
       />
       <Form.Check
-        className="mb-3"
+        className="mt-2"
         type="checkbox"
         name="termsAccepted"
         checked={member.termsAccepted}
@@ -535,18 +576,26 @@ const MemberForm = ({ initialData, onSubmit, onCancel, isEditing }) => {
       {errors.termsAccepted && <ValidationMessage message={errors.termsAccepted} />}
     </div>
   </Form.Group>
-  <Form.Group className="member-form-group">
-    <Form.Label className="member-form-label">개인정보처리방침</Form.Label>
-    <div className="col-sm-10">
+
+  {/* 개인정보 처리방침 */}
+  <Form.Group className="member-form-group d-flex align-items-start">
+    <Form.Label className="member-form-label text-end pe-3" style={{ width: "250px", paddingTop: "12px" }}>
+      개인정보처리방침
+    </Form.Label>
+    <div className="d-flex flex-column flex-grow-1">
       <Form.Control
         as="textarea"
         value={privacyContent}
         readOnly
         rows="6"
-        style={{ backgroundColor: '#f8f9fa', border: '1px solid #ced4da' }}
+        style={{ 
+          backgroundColor: '#f8f9fa', 
+          border: '1px solid #ced4da', 
+          maxWidth: "500px"
+        }}
       />
       <Form.Check
-        className="mb-3"
+        className="mt-2"
         type="checkbox"
         name="privacyAccepted"
         checked={member.privacyAccepted}
@@ -559,17 +608,19 @@ const MemberForm = ({ initialData, onSubmit, onCancel, isEditing }) => {
 </>
 )}
 
-<div className="member-form-btn-group">
-<Button type="submit" className="btn btn-primary btn-sm">
-  {isEditing ? '수정완료' : '입력완료'}
-</Button>
-<Button type="button" className="btn btn-outline-secondary btn-sm" onClick={onCancel}>
-  {isEditing ? '수정취소' : '가입취소'}
-</Button>
+{/* 버튼 그룹 */}
+<div className="member-form-btn-group d-flex justify-content-center mt-3">
+  <Button type="submit" className="btn btn-primary btn-sm mx-2">
+    {isEditing ? '수정완료' : '입력완료'}
+  </Button>
+  <Button type="button" className="btn btn-outline-secondary btn-sm mx-2" onClick={onCancel}>
+    {isEditing ? '수정취소' : '가입취소'}
+  </Button>
 </div>
 </Form>
 </Container>
 );
+
 };
 
 export default MemberForm;
