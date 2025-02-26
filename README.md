@@ -23,22 +23,22 @@ zerotogether : 제로웨이스트 및 업사이클링 정보 제공 커뮤니티
 ## 기술 스택
 
 ### Front-end
-React 18.3.1
-HTML5
-CSS3
-JavaScript
-Bootstrap 5.3.3
-AJAX
-Thymeleaf
+* React 18.3.1
+* HTML5
+* CSS3
+* JavaScript
+* Bootstrap 5.3.3
+* AJAX
+* Thymeleaf
 
 ### Back-end
-Java 8
-Spring Boot 2.7.7
-Oracle database 11g Express Edition
-Mybatis
+* Java 8
+* Spring Boot 2.7.7
+* Oracle database 11g Express Edition
+* Mybatis
 
 ### 주요 기술
-JWT
-Redis
-Spring Security
-RESTful API
+* JWT
+* Redis
+* Spring Security
+* RESTful API
