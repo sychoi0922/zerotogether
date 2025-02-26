@@ -1,5 +1,5 @@
 # Spring Boot + React 프로젝트
-**Zero Together** : 제로웨이스트 및 업사이클링 정보 제공 커뮤니티 웹사이트
+### **Zero Together** : 제로웨이스트 및 업사이클링 정보 제공 커뮤니티 웹사이트
 
 
 ## 프로젝트 정보
